@@ -16,7 +16,6 @@ import dagshub
 def train_model(n_estimators):
     tracking_uri = os.environ.get("MLFLOW_TRACKING_URI")
     mlflow.set_tracking_uri(tracking_uri)
-
     # Cargar el conjunto de datos desde el archivo CSV
     try:
         iris = pd.read_csv('data/iris_dataset.csv')
