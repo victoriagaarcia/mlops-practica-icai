@@ -48,7 +48,7 @@ jobs:
         MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_API_KEY }}
         MLFLOW_TRACKING_URI: ${{ secrets.MLFLOW_TRACKING_URI }}
       run: |
-        python3 train.py
+        dvc repro
 
   # docker-build-and-push:
   #   needs: train-and-report
