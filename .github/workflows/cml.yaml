@@ -96,7 +96,6 @@ jobs:
   #       docker push elenaardura/mlops-api
   #       docker push elenaardura/mlops-web
 
-  # a partir de aqui es extra
   deploy-to-gke:
     needs: train-and-report
     runs-on: ubuntu-latest
@@ -143,13 +142,13 @@ jobs:
       run: |
         docker build -t gcr.io/${{ vars.GCP_PROJECT_ID}}/mlops-api:latest .
         docker push gcr.io/${{ vars.GCP_PROJECT_ID}}/mlops-api:latest
-    # - name: Build and Push Web Docker Image
-  #     run: |
-  #       docker build -t gcr.io/${{ vars.GCP_PROJECT_ID}}/mlops-web:latest -f Dockerfile.web .
-  #       docker push gcr.io/${{ vars.GCP_PROJECT_ID}}/mlops-web:latest 
+    - name: Build and Push Web Docker Image
+      run: |
+        docker build -t gcr.io/${{ vars.GCP_PROJECT_ID}}/mlops-web:latest -f Dockerfile.web .
+        docker push gcr.io/${{ vars.GCP_PROJECT_ID}}/mlops-web:latest 
     - name: Deploy to GKE
       run: |
-        kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
-  #       kubectl apply -f web-deployment.yaml
-  #       kubectl apply -f web-service.yaml
+        kubectl apply -f api-deployment.yaml
+        kubectl apply -f api-service.yaml
+        kubectl apply -f web-deployment.yaml
+        kubectl apply -f web-service.yaml
